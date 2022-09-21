@@ -1,0 +1,8 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.todo-card {
+    border-radius: 10px;
+}

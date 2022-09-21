@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TakenoteController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('layout.template');
+// });
 
 //Route For TODO activity
+Route::get('/todo/view', [TodoController::class, 'index'])->name('todo.index');
 
 
 //Route for Note Taking Activity
+Route::get('/take-note/view', [TakenoteController::class, 'index'])->name('take-note.index');
