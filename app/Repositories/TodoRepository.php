@@ -8,7 +8,7 @@ class TodoRepository
 {
     public function getAllTodo($request)
     {
-        $todo = Todo::first()->orderBy('created_at', 'DESC')->paginate(10);
+        $todo = Todo::orderBy('created_at', 'DESC')->paginate(10);
         return compact('todo');
     }
 
@@ -19,22 +19,34 @@ class TodoRepository
 
     public function storeTodo($request)
     {
-        
+        $result = Todo::insertGetId([
+            'title' => $request->title,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        return $result;
     }
 
     public function showTodo($todo)
     {
+        $takenote = Todo::where('id', $todo->id)->first();
         return compact('todo');
     }
 
     public function editTodo($todo)
     {
+        $takenote = Todo::where('id', $todo->id)->first();
         return compact('todo');
     }
 
     public function updateTodo($todo, $request)
     {
-        
+        $result = Todo::where('id', $todo->id)->update([
+            'title' => $request->title,
+        ]);
+
+        return $result;
     }
 
     public function deleteTodo($todo)

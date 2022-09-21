@@ -1,3 +1,3 @@
 @include('layout.foot')
 
-@yield('script')
+@yield('scripts')

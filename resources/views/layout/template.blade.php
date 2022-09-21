@@ -36,7 +36,7 @@
         </ul>
       </div>
     </nav>
-
+    @include('components.flash-message')
     @yield('content')
     @include('layout.footer')
 </body>

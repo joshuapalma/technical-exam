@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTodoRequest extends FormRequest
+class StoreTakenoteRequests extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class UpdateTodoRequest extends FormRequest
     {
         return [
             'title' => ['string'],
-            'is_done' => ['numeric', 'between:0,1'],
+            'note' => ['string']
         ];
     }
 }

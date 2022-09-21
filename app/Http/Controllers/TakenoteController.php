@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTakenoteRequests;
+use App\Http\Requests\UpdateTakenoteRequests;
+use App\Models\Takenote;
 use Illuminate\Http\Request;
+use App\Repositories\TakenoteRepository;
 
 class TakenoteController extends Controller
 {
+    public $takenote;
+
+    public function __construct(TakenoteRepository $takenote)
+    {
+        $this->takenote = $takenote;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +24,8 @@ class TakenoteController extends Controller
      */
     public function index()
     {
-        return view('take-note.view');
+        $result = $this->takenote->getAllTakenote();
+        return view('take-note.view', $result);
     }
 
     /**
@@ -32,9 +44,10 @@ class TakenoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTakenoteRequests $request)
     {
-        //
+        $this->takenote->storeTakenote($request);
+        return redirect()->route('take-note.index')->with('success', 'Note Created Successfully');
     }
 
     /**
@@ -66,9 +79,10 @@ class TakenoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTakenoteRequests $request, Takenote $id)
     {
-        //
+        $this->takenote->updateTakenote($id, $request);
+        return redirect()->route('take-note.index')->with('warning', 'Note Updated Successfully');
     }
 
     /**
@@ -77,8 +91,9 @@ class TakenoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Takenote $id)
     {
-        //
+        $this->takenote->deleteTakenote($id);
+        return redirect()->route('take-note.index')->with('error', 'Note has been deleted successfully');
     }
 }

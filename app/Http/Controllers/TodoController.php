@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTodoRequests;
+use App\Http\Requests\UpdateTodoRequests;
+use App\Models\Todo;
 use Illuminate\Http\Request;
+use App\Repositories\TodoRepository;
 
 class TodoController extends Controller
 {
+    public $todo;
+
+    public function __construct(TodoRepository $todo)
+    {
+            $this->toido = $todo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +43,10 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTodoRequests $request)
     {
-        //
+        $this->todo->storeTodo($request);
+        return redirect()->route('todo.index')->with('success', 'Todo Created Successfully');
     }
 
     /**
@@ -66,9 +78,10 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTodoRequests $request, $id)
     {
-        //
+        $this->todo->updateTodo($id, $request);
+        return redirect()->route('todo.index')->with('warning', 'Todo Updated Successfully');
     }
 
     /**
@@ -79,6 +92,7 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->takenote->deleteTodo($id);
+        return redirect()->route('todo.index')->with('error', 'Todo has been deleted successfully');
     }
 }
