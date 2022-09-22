@@ -14,7 +14,7 @@ class TodoController extends Controller
 
     public function __construct(TodoRepository $todo)
     {
-            $this->toido = $todo;
+            $this->todo = $todo;
     }
 
     /**
@@ -24,7 +24,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('todo.view');
+        $result = $this->todo->getAllTodo();
+        return view('todo.view', $result);
     }
 
     /**
@@ -90,9 +91,15 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Todo $id)
     {
-        $this->takenote->deleteTodo($id);
+        $this->todo->deleteTodo($id);
         return redirect()->route('todo.index')->with('error', 'Todo has been deleted successfully');
+    }
+
+    public function markDoneTodo(Todo $id)
+    {
+        $this->todo->markDoneTodo($id);
+        return redirect()->route('todo.index')->with('success', 'Todo is Mark Done Successfully');
     }
 }

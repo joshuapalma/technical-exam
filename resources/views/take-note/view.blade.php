@@ -84,8 +84,8 @@
         function editNote(id) {
             const detail = $(`#takenote-details-${id}`).data().detail;            
 
-            $('#title').attr('value',detail.title);
-            $('#note').attr('value',detail.note);
+            $('#title-takenote').attr('value',detail.title);
+            $('#note-takenote').val(detail.note);
             $('#edit-note').attr('action', `update/${detail.id}`)
         }
 

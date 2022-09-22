@@ -14,7 +14,7 @@
                     <div class="col-md-12">
                         <div class="input-group mb-3">
                           <span class="input-group-text fw-bold" id="basic-addon1">TITLE</span>
-                          <input type="text" class="form-control" name="title" id="title" value="" placeholder="TITLE" aria-label="Username" aria-describedby="basic-addon1">
+                          <input type="text" class="form-control" name="title" id="title-takenote" value="" placeholder="TITLE" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label>Note</label>
-                        <textarea name="note" id="note" cols="30" rows="10" class="form-control" value="" placeholder="Add Note..."></textarea>
+                        <textarea name="note" id="note-takenote" cols="30" rows="10" class="form-control" value="" placeholder="Add Note..."></textarea>
                     </div>
                 </div>
             </div>

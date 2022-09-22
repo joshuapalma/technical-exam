@@ -6,7 +6,7 @@ use App\Models\Todo;
 
 class TodoRepository
 {
-    public function getAllTodo($request)
+    public function getAllTodo()
     {
         $todo = Todo::orderBy('created_at', 'DESC')->paginate(10);
         return compact('todo');
@@ -21,6 +21,7 @@ class TodoRepository
     {
         $result = Todo::insertGetId([
             'title' => $request->title,
+            'is_done' => '0',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
@@ -52,5 +53,14 @@ class TodoRepository
     public function deleteTodo($todo)
     {
         return Todo::find($todo->id)->delete();
+    }
+
+    public function markDoneTodo($todo)
+    {
+        $result = Todo::where('id', $todo->id)->update([
+            'is_done' => '1'
+        ]);
+
+        return $result;
     }
 }

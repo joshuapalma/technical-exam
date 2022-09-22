@@ -24,6 +24,7 @@ Route::get('/todo/view', [TodoController::class, 'index'])->name('todo.index');
 Route::post('/todo/store', [TodoController::class, 'store'])->name('todo.store');
 Route::post('/todo/update/{id}', [TodoController::class, 'update'])->name('todo.update');
 Route::delete('/todo/delete/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
+Route::put('/todo/mark-done/{id}', [TodoController::class, 'markDoneTodo'])->name('todo.mark-done');
 
 //Route for Note Taking Activity
 Route::get('/take-note/view', [TakenoteController::class, 'index'])->name('take-note.index');
